@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:todoey_flutter/screens/tasks_screen.dart';
 
 class AddTaskScreen extends StatelessWidget {
+
+  final Function addTaskCallback;
+
+  AddTaskScreen(this.addTaskCallback);
+
   @override
   Widget build(BuildContext context) {
+
+    String newTaskTitle;
+
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -18,24 +26,31 @@ class AddTaskScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Add Task',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.lightBlueAccent,
-            ),),
+            Text(
+              'Add Task',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.lightBlueAccent,
+              ),
+            ),
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (newText) {
+                newTaskTitle = newText;
+              },
             ),
             FlatButton(
-              child: Text('Add',
-              style: TextStyle(
-                color: Colors.white,
-              ),),
+              child: Text(
+                'Add',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               color: Colors.lightBlueAccent,
-              onPressed: (){
-
+              onPressed: () {
+                addTaskCallback(newTaskTitle);
               },
             ),
           ],
